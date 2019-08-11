@@ -1,5 +1,4 @@
 package data;
-import haxecontracts.*;
 
 enum Content{
 	X;
@@ -7,18 +6,7 @@ enum Content{
 	None;
 }
 
-class Tile implements haxecontracts.HaxeContracts{
+class Tile implements DataClass{
+	@:validate(_ == 0)
 	public final content : Content;
-	public final won : Bool;
-
-	public function new(content, won = false){
-		this.content = content;
-		this.won = won;
-	}
-
-    @invariants function invariants(){
-        Contract.invariant(content != null);
-        Contract.invariant(won != null);
-    }
-
 }

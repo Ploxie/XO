@@ -6,5 +6,6 @@
 -lib haxedci
 -lib HaxeContracts
 -lib deepstate
+-lib dataclass
 -debug
 

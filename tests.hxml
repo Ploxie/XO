@@ -8,5 +8,6 @@
 -lib HaxeContracts
 -lib buddy
 -lib deepstate
+-lib dataclass
 -debug
 

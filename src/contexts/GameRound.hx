@@ -50,7 +50,7 @@ class GameRound implements dci.Context{
                 case X: return;
                 case O: return;
                 case None:
-                    container.update(container.state.tiles[tilePos] = new Tile(player.currentTurn()));
+                    container.update(container.state.tiles[tilePos] = new Tile({content: player.currentTurn()}));
 		    }     
 
             board.checkThreeInRow();       
@@ -66,7 +66,7 @@ class GameRound implements dci.Context{
                     for(tile in winningRow){
                         final winningTile = tiles.find(t -> t == tile);
                         final index = tiles.indexOf(tile);
-                        container.update(tiles[index] = new Tile(winningTile.content, true));
+                        container.update(tiles[index] = new Tile({content: winningTile.content}));
                     }
                 case None: player.switchTurn();
                 case NobodyWon:   
