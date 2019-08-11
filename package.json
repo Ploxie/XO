@@ -1,0 +1,23 @@
+{
+  "name": "xo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bin/app.js",
+  "bin": {
+    "xo": "live.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "http-server -c-1 bin"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ploxie/XO.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Ploxie/XO/issues"
+  },
+  "homepage": "https://github.com/Ploxie/XO#readme"
+}

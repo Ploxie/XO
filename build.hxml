@@ -3,5 +3,6 @@
 -main Main
 -js bin/test.js
 -lib mithril
+-lib haxedci
 -debug
 

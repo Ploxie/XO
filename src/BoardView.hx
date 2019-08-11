@@ -1,5 +1,7 @@
 import mithril.M;
-import Main.Board;
+import data.Board;
+import contexts.GameRound;
+import contexts.CheckWinner;
 
 class BoardView implements Mithril{
 	final board : Board;
@@ -19,13 +21,13 @@ class BoardView implements Mithril{
 
 	function tile(i){
 		return m("span", {
-            onclick: e -> board.clicked(i),
+            onclick: e -> new GameRound(board, i).start(),
             "class": board.tiles[i].won ? "won" : null
         }, tileContent(i));
 	}
 
     function gameStatus(){
-        return switch board.winner(){
+        return switch new CheckWinner(board).check(){
             case Winner(winnerRow): switch winnerRow[0].content{
                 case X: "X Won!";
                 case O: "O Won!";
