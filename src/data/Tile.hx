@@ -7,6 +7,5 @@ enum Content{
 }
 
 class Tile implements DataClass{
-	@:validate(_ == 0)
 	public final content : Content;
 }
