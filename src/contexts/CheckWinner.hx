@@ -1,18 +1,16 @@
 package contexts;
-import data.Board;
+import data.GameStatus;
 import data.Tile;
 
 class CheckWinner{
-	final board : {
-        function index(i: Int) : Tile;
-    };
+	final board : ds.ImmutableArray<Tile>;
 
-	public function new(board){
-		this.board = board;
+	public function new(container: DeepStateContainer<GameState>){
+		this.board = container.state.tiles;
 	}
 
-	public function check() : data.Board.GameStatus {
-		final index = board.index;
+	public function check() : GameStatus {
+		final index = i -> board[i];
 
 		final row1 = [index(0), index(1), index(2)];
 		final row2 = [index(3), index(4), index(5)];

@@ -8,16 +8,12 @@ enum Content{
 }
 
 class Tile implements haxecontracts.HaxeContracts{
-	public var content : Content;
-	public var won(default, null) : Bool = false;
+	public final content : Content;
+	public final won : Bool;
 
-	public function new(content){
+	public function new(content, won = false){
 		this.content = content;
-	}
-
-	public function youWon(){
-        Contract.requires(won == false, "You cannot win twice");
-		this.won = true;
+		this.won = won;
 	}
 
     @invariants function invariants(){

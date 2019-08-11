@@ -1,18 +1,18 @@
 import mithril.M;
-import data.Board;
+import data.GameStatus;
 import contexts.GameRound;
 import contexts.CheckWinner;
 
 class BoardView implements Mithril{
-	final board : Board;
+	final container : DeepStateContainer<GameState>;
 
 
-	public function new(board){
-		this.board = board;
+	public function new(container){
+		this.container = container;
 	}
 
 	function tileContent(i){
-		return switch board.index(i).content{
+		return switch container.state.tiles[i].content{
 			case X: "X";
 			case O: "O";
 			case None: " ";
@@ -21,13 +21,13 @@ class BoardView implements Mithril{
 
 	function tile(i){
 		return m("span", {
-            onclick: e -> new GameRound(board, i).start(),
-            "class": board.index(i).won ? "won" : null
+            onclick: e -> new GameRound(container, i).start(),
+            "class": container.state.tiles[i].won ? "won" : null
         }, tileContent(i));
 	}
 
     function gameStatus(){
-        return switch new CheckWinner(board).check(){
+        return switch new CheckWinner(container).check(){
             case Winner(winnerRow): switch winnerRow[0].content{
                 case X: "X Won!";
                 case O: "O Won!";
@@ -35,7 +35,7 @@ class BoardView implements Mithril{
             }
             case NobodyWon: "It's a draw!";
             
-            case None: switch board.turn{
+            case None: switch container.state.turn{
                 case X: "X's Turn!";
                 case O: "O's Turn!";
                 case None: throw "Invalid Turn state";

@@ -7,5 +7,6 @@
 -lib haxedci
 -lib HaxeContracts
 -lib buddy
+-lib deepstate
 -debug
 

@@ -1,5 +1,5 @@
 package contexts;
-import data.Board;
+import data.GameStatus;
 import data.Tile;
 
 using Lambda;
@@ -11,23 +11,29 @@ using Lambda;
 
 class GameRound implements dci.Context{
 
-    public function new(boardObject: Board, tilePos: Int){
-        this.board = boardObject;
-        this.player = boardObject;
-        this.tile = boardObject.index(tilePos);
+    final container : DeepStateContainer<GameState>;
+    final tilePos : Int;
+
+    public function new(container: DeepStateContainer<GameState>, tilePos: Int){
+        this.container = container;
+        this.tilePos = tilePos;
+        this.board = container.state;
+        this.player = container.state;
+        this.tile = container.state.tiles[tilePos];
     }
 
     public function start(){
-        if(new CheckWinner(board).check().equals(None)){
+        if(new CheckWinner(container).check().equals(None)){
             tile.fill();
         }        
     }
 
     @role var player: {
-        var turn : Content;
+        final turn : Content;
 
         public function switchTurn(){
-            if(self.turn == X) self.turn = O else self.turn = X;
+            final newTurn = if(self.turn == X) O else X;
+            container.update(container.state.turn = newTurn);
         }
 
         public function currentTurn(){
@@ -37,14 +43,14 @@ class GameRound implements dci.Context{
     };
 
     @role var tile: {
-        var content : Content;
+        final content : Content;
 
         public function fill(){
             switch self.content{
                 case X: return;
                 case O: return;
                 case None:
-                    self.content = player.currentTurn();                    
+                    container.update(container.state.tiles[tilePos] = new Tile(player.currentTurn()));
 		    }     
 
             board.checkThreeInRow();       
@@ -52,15 +58,15 @@ class GameRound implements dci.Context{
 
     };
     @role var board: {
-       function index(i: Int): Tile; 
-       function find(f: Tile -> Bool) : Tile;
 
         public function checkThreeInRow(){
-            switch new CheckWinner(self).check(){
+            final tiles = container.state.tiles;
+            switch new CheckWinner(container).check(){
                 case Winner(winningRow):
                     for(tile in winningRow){
-                        final tile = find(t -> t == tile);
-                        tile.youWon();
+                        final winningTile = tiles.find(t -> t == tile);
+                        final index = tiles.indexOf(tile);
+                        container.update(tiles[index] = new Tile(winningTile.content, true));
                     }
                 case None: player.switchTurn();
                 case NobodyWon:   
