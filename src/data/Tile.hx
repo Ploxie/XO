@@ -7,7 +7,7 @@ enum Content{
 	None;
 }
 
-class Tile {
+class Tile implements haxecontracts.HaxeContracts{
 	public var content : Content;
 	public var won(default, null) : Bool = false;
 

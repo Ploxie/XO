@@ -1,9 +1,11 @@
 -cp src
 -D analyzer-optimize
--main Main
--js bin/app.js
+-D nodejs
+-main Tests
+-js bin/test.js
 -lib mithril
 -lib haxedci
 -lib HaxeContracts
+-lib buddy
 -debug
 

@@ -3,3 +3,5 @@ bin/test.js.map
 bin/test.js
 bin/style.min.css
 bin/style.css
+*.map
+bin/app.js

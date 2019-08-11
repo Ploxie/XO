@@ -9,7 +9,7 @@ enum GameStatus {
 	NobodyWon;
 }
 
-class Board{
+class Board implements haxecontracts.HaxeContracts{
 	final tiles : Array<Tile> = [];
 	public var turn = X;
 
@@ -22,7 +22,7 @@ class Board{
     public function index(i: Int) return tiles[i];
 
     public function find(f: Tile -> Bool) : Tile {
-        Contract.ensures(Contract.result != null);       
+        Contract.ensures(Contract.result != null);       		
         return tiles.find(f);
     }
 }
