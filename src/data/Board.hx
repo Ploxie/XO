@@ -1,5 +1,7 @@
 package data;
 import data.Tile;
+import haxecontracts.*;
+using Lambda;
 
 enum GameStatus {
 	Winner(row : Array<Tile>);
@@ -8,7 +10,7 @@ enum GameStatus {
 }
 
 class Board{
-	public final tiles : Array<Tile> = [];
+	final tiles : Array<Tile> = [];
 	public var turn = X;
 
 	public function new(){
@@ -16,4 +18,11 @@ class Board{
 			tiles.push(new Tile(None));
 		}
 	}
+
+    public function index(i: Int) return tiles[i];
+
+    public function find(f: Tile -> Bool) : Tile {
+        Contract.ensures(Contract.result != null);       
+        return tiles.find(f);
+    }
 }

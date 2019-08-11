@@ -14,7 +14,7 @@ class GameRound implements dci.Context{
     public function new(boardObject: Board, tilePos: Int){
         this.board = boardObject;
         this.player = boardObject;
-        this.tile = boardObject.tiles[tilePos];
+        this.tile = boardObject.index(tilePos);
     }
 
     public function start(){
@@ -52,17 +52,14 @@ class GameRound implements dci.Context{
 
     };
     @role var board: {
-        final tiles : Array<Tile>; 
+       function index(i: Int): Tile; 
+       function find(f: Tile -> Bool) : Tile;
 
         public function checkThreeInRow(){
             switch new CheckWinner(self).check(){
                 case Winner(winningRow):
                     for(tile in winningRow){
-                        final tile = tiles.find(t -> t == tile);
-                        if(tile == null){
-                            throw "Tile not found";
-                        }
-
+                        final tile = find(t -> t == tile);
                         tile.youWon();
                     }
                 case None: player.switchTurn();

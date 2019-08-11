@@ -12,7 +12,7 @@ class BoardView implements Mithril{
 	}
 
 	function tileContent(i){
-		return switch board.tiles[i].content{
+		return switch board.index(i).content{
 			case X: "X";
 			case O: "O";
 			case None: " ";
@@ -22,7 +22,7 @@ class BoardView implements Mithril{
 	function tile(i){
 		return m("span", {
             onclick: e -> new GameRound(board, i).start(),
-            "class": board.tiles[i].won ? "won" : null
+            "class": board.index(i).won ? "won" : null
         }, tileContent(i));
 	}
 

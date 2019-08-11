@@ -4,5 +4,6 @@
 -js bin/test.js
 -lib mithril
 -lib haxedci
+-lib HaxeContracts
 -debug
 

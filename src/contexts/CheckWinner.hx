@@ -4,7 +4,7 @@ import data.Tile;
 
 class CheckWinner{
 	final board : {
-        final tiles : Array<Tile>;
+        function index(i: Int) : Tile;
     };
 
 	public function new(board){
@@ -12,18 +12,18 @@ class CheckWinner{
 	}
 
 	public function check() : data.Board.GameStatus {
-		final tiles = board.tiles;
+		final index = board.index;
 
-		final row1 = [tiles[0], tiles[1], tiles[2]];
-		final row2 = [tiles[3], tiles[4], tiles[5]];
-		final row3 = [tiles[6], tiles[7], tiles[8]];
+		final row1 = [index(0), index(1), index(2)];
+		final row2 = [index(3), index(4), index(5)];
+		final row3 = [index(6), index(7), index(8)];
 
-		final col1 = [tiles[0], tiles[3], tiles[6]];
-		final col2 = [tiles[1], tiles[4], tiles[7]];
-		final col3 = [tiles[2], tiles[5], tiles[8]];
+		final col1 = [index(0), index(3), index(6)];
+		final col2 = [index(1), index(4), index(7)];
+		final col3 = [index(2), index(5), index(8)];
 
-		final dia1 = [tiles[0], tiles[4], tiles[8]];
-		final dia2 = [tiles[6], tiles[4], tiles[2]];
+		final dia1 = [index(0), index(4), index(8)];
+		final dia2 = [index(6), index(4), index(2)];
 
 		var gameOver = true;
 
