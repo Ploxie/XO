@@ -1,0 +1,7 @@
+-cp src
+-D analyzer-optimize
+-main Main
+-js bin/test.js
+-lib mithril
+-debug
+
