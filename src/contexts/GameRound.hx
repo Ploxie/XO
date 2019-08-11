@@ -23,7 +23,7 @@ class GameRound implements dci.Context{
     }
 
     public function start(){
-        if(new CheckWinner(container).check().equals(None)){
+        if(new CheckWinner(container.state.tiles).check().equals(None)){
             tile.fill();
         }        
     }
@@ -61,7 +61,7 @@ class GameRound implements dci.Context{
 
         public function checkThreeInRow(){
             final tiles = container.state.tiles;
-            switch new CheckWinner(container).check(){
+            switch new CheckWinner(tiles).check(){
                 case Winner(winningRow):
                     for(tile in winningRow){
                         final winningTile = tiles.find(t -> t == tile);

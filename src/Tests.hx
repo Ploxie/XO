@@ -44,7 +44,7 @@ using Lambda;
 
                     new GameRound(container, 2).start();
 
-                    switch new CheckWinner(container).check(){
+                    switch new CheckWinner(container.state.tiles).check(){
                         case Winner(row): 
                             row[0].content.should.equal(X);
                             row[1].content.should.equal(X);
@@ -61,7 +61,7 @@ using Lambda;
                         return null;
                     });
 
-                    new CheckWinner(container).check().should.equal(NobodyWon);
+                    new CheckWinner(container.state.tiles).check().should.equal(NobodyWon);
                 });
 
 

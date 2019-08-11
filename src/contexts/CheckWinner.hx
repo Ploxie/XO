@@ -1,12 +1,16 @@
 package contexts;
+
 import data.GameStatus;
 import data.Tile;
+import haxecontracts.*;
 
-class CheckWinner{
+class CheckWinner implements HaxeContracts {
 	final board : ds.ImmutableArray<Tile>;
 
-	public function new(container: DeepStateContainer<GameState>){
-		this.board = container.state.tiles;
+	public function new(board : ds.ImmutableArray<Tile>){
+		Contract.requires(board.length == 9);
+		Contract.requires(!board.exists(t -> t == null));
+		this.board = board;
 	}
 
 	public function check() : GameStatus {
